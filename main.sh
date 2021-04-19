@@ -10,6 +10,9 @@
 J1="X"
 J2="O"
 
+rouge='\e[0;31m'
+neutre='\e[0;m'
+
 turn=1
 game_on=true
 
@@ -44,25 +47,26 @@ joueurs(){
   if [[ $(($turn % 2)) == 0 ]]
   then
     jouer=$J2
-    echo -n "Joueur 2 choissi une case: "
+    echo -n "Joueur 2 choisi une case: "
   else
-    echo -n "Joueur 1 choissi une case: "
+    echo -n "Joueur 1 choisi une case: "
     jouer=$J1
   fi
 
   read choix
 
+##############CONTRÔLE DES CARACTÈRES##############
   while (($choix<1))||(($choix>9)); do
-	  echo "Saisie invalide (1 à 9) :"
+	  echo -e "${rouge}Saisie invalide (1 à 9) :${neutre}"
 	  read choix
 	done
 
   space=${case[($choix -1)]} 
 
-##############CONTRÔLE DE CASE##############
+##############CONTRÔLE DES CASES##############
   if [[ ! $choix =~ ^-?[0-9]+$ ]] || [[ ! $space =~ ^[0-9]+$  ]]
   then 
-    echo "Cette case est déjà utilisé."
+    echo -e "${rouge}Saisie invalide, case déjà utilisé${neutre}"
     joueurs
   else
     case[($choix -1)]=$jouer
@@ -119,9 +123,9 @@ victoire(){
 
 ##############FONCTION POUR RELANCER UNE PARTIE##############
 demo() {
-    echo "Voulez vous re-jouer ? (y/n)" >&2
+    echo "Voulez-vous rejouer ? (y/n)" >&2
     read -rsn1 input
-    if [ "$input" = "y" ]; then
+    if [ "$input" = "Y" ]; then
       turn=1
       game_on=true
       case=( 1 2 3 4 5 6 7 8 9 )
@@ -151,4 +155,3 @@ rejouer
 #https://devhints.io/bash
 #https://devdocs.io/bash/
 #M122 Cours bash.pdf
-#https://github.com/FergyAlexBray
