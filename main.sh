@@ -1,6 +1,6 @@
 #!/bin/bash
 ######################################################
-#Create and edit by Lucas Ruffiner and Joaquim Pittet
+#Create and edit by Skize and Jopit
 #Last edit 19.04.2021 
 #M122 EPSIC
 ######################################################
